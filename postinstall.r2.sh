@@ -11,7 +11,7 @@ repo="https://raw.githubusercontent.com/linuxichrome/chromebook/master"
 #[Packages]
 base="xorg-server xorg-xinit xorg-server-utils xf86-video-fbdev xf86-input-synaptics"
 desktop="kdebase xfce4 xfce4-goodies"
-extra="wicd wicd-gtk chromium chromium-pepper-flash alsa-utils bash-completion sudo libwebkit libpng12 acpid pm-utils"
+extra="wicd wicd-gtk chromium chromium-pepper-flash alsa-utils bash-completion sudo libwebkit libpng12 acpid pm-utils libreoffice"
 
 
 #Check internet connection
