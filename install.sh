@@ -1,5 +1,5 @@
 #!/bin/bash
-repo="http://www.oapps.se/repo/chromebook"
+repo="https://raw.githubusercontent.com/linuxichrome/chromebook/master"
 
 log() {
     printf "\n\033[32m$*\033[00m\n"
