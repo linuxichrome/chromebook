@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#Load keymap
+
+loadkeys sv-latin1
+
 #Connect to wireless network
 
 wifi-menu mlan0
