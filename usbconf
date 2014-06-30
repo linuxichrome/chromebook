@@ -1,0 +1,1 @@
+/dev/sda1	/mnt/usbstick	vfat	user,noauto,noatime,flush	0	0
