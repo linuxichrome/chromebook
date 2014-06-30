@@ -6,7 +6,7 @@
 username="studerande"
 
 #Sets the repository
-repo="http://www.oapps.se/repo/chromebook"
+repo="https://raw.githubusercontent.com/linuxichrome/chromebook/master"
 
 #[Packages]
 base="xorg-server xorg-xinit xorg-server-utils xf86-video-fbdev xf86-input-synaptics"
@@ -65,7 +65,7 @@ echo "Installing Citrix Receiver."
 
 #Cleanup
 	
-	rm -R *
+	rm *
 	echo "Installation complete. System will restart in 10 seconds."
 	sleep 10s; shutdown -r now
 
