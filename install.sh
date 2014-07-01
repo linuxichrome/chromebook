@@ -30,7 +30,7 @@ UBOOTFILE="nv_uboot-snow.kpart.bz2"
 if [ $DEVICE = $EMMC ]; then
     # for eMMC we need to get some things before we can partition
     echo -e "\n[archlinuxfr]\nSigLevel = Never\nServer = http://repo.archlinux.fr/arm\n" >> /etc/pacman.conf
-    pacman -Syyu devtools-alarm base-devel git libyaml parted dosfstools cgpt --ignore systemd --ignore systemd-sysvcompat --noconfirm
+    pacman -Syyu devtools-alarm base-devel git libyaml parted dosfstools cgpt --ignore systemd --ignore systemd-sysvcompat --noconfirm --needed
     wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz
     tar zxvf package-query.tar.gz
     cd package-query
@@ -54,8 +54,8 @@ cgpt add -i 12 -t data -b 73728 -s 32768 -l Script ${DEVICE}
 PARTSIZE=`cgpt show ${DEVICE} | grep 'Sec GPT table' | egrep -o '[0-9]+' | head -n 1`
 cgpt add -i 3 -t data -b 106496 -s `expr ${PARTSIZE} - 106496` -l Root ${DEVICE}
 partprobe ${DEVICE}
-mkfs.ext2 $P2
-mkfs.ext4 $P3
+mkfs.ext2 -F $P2
+mkfs.ext4 -F $P3
 mkfs.vfat -F 16 $P12
 
 cd /tmp
