@@ -9,6 +9,8 @@ log() {
 EMMC="/dev/mmcblk0"
 DEFAULT_USB="/dev/sda"
 DEVICE=${1:-$DEFAULT_USB}
+PREINSTALL="~/preinstall"
+INSTALLPKG="~/installpkg"
 
 if [ "$DEVICE" = "$EMMC" ]; then
     P1="${DEVICE}p1"
@@ -30,15 +32,20 @@ UBOOTFILE="nv_uboot-snow.kpart.bz2"
 if [ $DEVICE = $EMMC ]; then
     # for eMMC we need to get some things before we can partition
     echo -e "\n[archlinuxfr]\nSigLevel = Never\nServer = http://repo.archlinux.fr/arm\n" >> /etc/pacman.conf
-    pacman -Syyu devtools-alarm base-devel git libyaml parted dosfstools cgpt --ignore systemd --ignore systemd-sysvcompat --noconfirm --needed
+    
+	if [ -d "$DIRECTORY" ]; then
+		pacman -U ~/preinstall/*
+	else
+		pacman -Syyu devtools-alarm base-devel git libyaml parted dosfstools cgpt --ignore systemd --ignore systemd-sysvcompat --noconfirm --needed
+	fi    
+
     wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz
-    tar zxvf package-query.tar.gz
+    tar xf package-query.tar.gz
     cd package-query
     makepkg -si --asroot --noconfirm
     cd
-    pacman -S yaourt --noconfirm
-    log "When prompted to modify PKGBUILD for trousers, set arch to armv7h"
-    yaourt -Syy vboot-utils --noconfirm
+    pacman -Syy yaourt --noconfirm
+    yaourt -S vboot-utils --noconfirm
     wget $repo/trousers-0.3.13-2-armv7h.pkg.tar.xz
     pacman -U trousers-0.3.13-2-armv7h.pkg.tar.xz --noconfirm 
 fi
