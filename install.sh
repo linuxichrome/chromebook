@@ -34,9 +34,9 @@ if [ $DEVICE = $EMMC ]; then
     wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz
     tar zxvf package-query.tar.gz
     cd package-query
-    makepkg -si --asroot
+    makepkg -si --asroot --noconfirm
     cd
-    pacman -S yaourt
+    pacman -S yaourt --noconfirm
     log "When prompted to modify PKGBUILD for trousers, set arch to armv7h"
     yaourt -Syy vboot-utils --noconfirm
     wget $repo/trousers-0.3.13-2-armv7h.pkg.tar.xz
@@ -45,7 +45,7 @@ fi
 
 log "Creating volumes on ${DEVICE}"
 umount ${DEVICE}*
-parted ${DEVICE} mklabel gpt
+parted -s ${DEVICE} mklabel gpt
 cgpt create -z ${DEVICE}
 cgpt create ${DEVICE}
 cgpt add -i 1 -t kernel -b 8192 -s 32768 -l U-Boot -S 1 -T 5 -P 10 ${DEVICE}
