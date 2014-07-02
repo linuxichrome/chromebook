@@ -126,5 +126,8 @@ if [ $DEVICE = $EMMC ]; then
 	fi
 fi
 	log "All done! Reboot and press ctrl + D to boot Arch"
+
+	echo "Installation complete. System will restart in 10 seconds."
+	sleep 10s; shutdown -r now
 sync
 
