@@ -9,8 +9,8 @@ log() {
 EMMC="/dev/mmcblk0"
 DEFAULT_USB="/dev/sda"
 DEVICE=${1:-$DEFAULT_USB}
-INSTALLFILES="~/installfiles"
-INSTALLPKG="~/installpkg"
+INSTALLFILES="/root/installfiles"
+INSTALLPKG="/root/installpkg"
 
 if [ "$DEVICE" = "$EMMC" ]; then
     P1="${DEVICE}p1"
@@ -34,7 +34,7 @@ if [ $DEVICE = $EMMC ]; then
     echo -e "\n[archlinuxfr]\nSigLevel = Never\nServer = http://repo.archlinux.fr/arm\n" >> /etc/pacman.conf
     
 	if [ -d "$INSTALLFILES" ]; then
-		pacman -U ~/preinstall/*
+		pacman -U ~/installfiles/* --needed --noconfirm
 	else
 		pacman -Syyu devtools-alarm base-devel git libyaml parted dosfstools cgpt --ignore systemd --ignore systemd-sysvcompat --noconfirm --needed
 	fi    
@@ -126,9 +126,9 @@ if [ $DEVICE = $EMMC ]; then
 #Check if installpkg directory exists so we install packages to the new installation
 	if [ -d "$INSTALLPKG" ]; then	
 		sh chroot.sh
-		cp ~/installpkg ~/mnt/arch/installpkg
+		cp -R /root/installpkg /mnt/arch/installpkg
 		chroot /mnt/arch /bin/bash
-		pacman -U ~/installpkg
+		pacman -U /installpkg/*
 	fi
 fi
 	log "All done! Reboot and press ctrl + D to boot Arch"
