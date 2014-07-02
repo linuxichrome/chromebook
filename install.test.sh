@@ -116,18 +116,18 @@ else
 fi
 
 if [ $DEVICE = $EMMC ]; then
-#Check if installpkg directory exists so we install packages to the new installation
+#Check if installpkg directory exists so we can install packages to the new installation
 	if [ -d "$INSTALLPKG" ]; then	
 		sh /root/scripts/chroot.sh
 		cp -R /root/installpkg /mnt/arch/installpkg
+		cp -R /root/config /mnt/arch/tmp/config
 		cp /root/scripts/chroot-install.sh /mnt/arch
 		chroot /mnt/arch /bin/bash -c "sh chroot-install.sh"
 		exit
 	fi
+log "All done! Reboot and press ctrl + D to boot Arch"
 fi
-	log "All done! Reboot and press ctrl + D to boot Arch"
-
-	echo "Installation complete. System will restart in 10 seconds."
+	printf "System will restart in 10 seconds."
 	sleep 10s; shutdown -r now
 sync
 
