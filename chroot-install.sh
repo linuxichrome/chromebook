@@ -13,11 +13,7 @@ base="xorg-server xorg-xinit xorg-server-utils xf86-video-fbdev xf86-input-synap
 desktop="kdebase xfce4 xfce4-goodies"
 extra="wicd wicd-gtk chromium chromium-pepper-flash alsa-utils bash-completion sudo libwebkit libpng12 acpid pm-utils libreoffice"
  
-echo "Updating system."
-
-	pacman -Syy --ignore systemd --ignore systemd-sysvcompat --noconfirm
-
-echo "Installing additional software and configuration files."
+echo "Installing packages and configution files."
 
 	pacman -U /installpkg/* --noconfirm
 	ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
