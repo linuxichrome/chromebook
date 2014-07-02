@@ -46,7 +46,3 @@ echo "Installing Citrix Receiver."
 	echo "application/x-ica=wfica.desktop" >> /usr/share/applications/mimeinfo.cache
 
 #Finished
-	
-	echo "Installation complete. System will restart in 10 seconds."
-	sleep 10s; shutdown -r now
-
