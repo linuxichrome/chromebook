@@ -3,7 +3,6 @@ repo="https://raw.githubusercontent.com/linuxichrome/chromebook/master"
 
 log() {
     printf "\n\033[32m$*\033[00m\n"
-    read -p "Press [enter] to continue." KEY
 }
 
 EMMC="/dev/mmcblk0"
@@ -24,9 +23,9 @@ else
     P12="${DEVICE}12"
 fi
 
-OSHOST="/root/src/"
+OSHOST="http://archlinuxarm.org/os/"
 OSFILE="ArchLinuxARM-chromebook-latest.tar.gz"
-UBOOTHOST="/root/src/"
+UBOOTHOST="http://commondatastorage.googleapis.com/chromeos-localmirror/distfiles/"
 UBOOTFILE="nv_uboot-snow.kpart.bz2"
 
 if [ $DEVICE = $EMMC ]; then
@@ -65,16 +64,20 @@ mkfs.ext2 -F $P2
 mkfs.ext4 -F $P3
 mkfs.vfat -F 16 $P12
 
-cd /src
+cp /root/src/* /tmp
+
+cd /tmp
 
 if [ ! -f "${OSFILE}" ]; then
-    log "Downloading ${OSFILE}"
-    wget ${OSHOST}${OSFILE}
+    log "${OSFILE} does not exist, exiting..."
 else
     log "Looks like you already have ${OSFILE}"
 fi
 
 log "Installing Arch to ${P3} (this will take a moment...)"
+
+cp /root/src/* /tmp
+
 mkdir -p root
 
 mount $P3 root
@@ -127,7 +130,7 @@ if [ $DEVICE = $EMMC ]; then
 	if [ -d "$INSTALLPKG" ]; then	
 		sh /root/chroot.sh
 		cp -R /root/installpkg /mnt/arch/installpkg
-		cp ./chroot-install.sh /mnt/arch
+		cp /root/chroot-install.sh /mnt/arch
 		chroot /mnt/arch /bin/bash -c "sh chroot-install.sh"
 		exit
 	fi
