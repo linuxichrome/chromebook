@@ -125,9 +125,9 @@ fi
 if [ $DEVICE = $EMMC ]; then
 #Check if installpkg directory exists so we install packages to the new installation
 	if [ -d "$INSTALLPKG" ]; then	
-		sh chroot.sh
+		sh /root/chroot.sh
 		cp -R /root/installpkg /mnt/arch/installpkg
-		chroot /mnt/arch /bin/bash pacman -U /installpkg/*
+		chroot /mnt/arch /bin/bash -c "pacman -U /installpkg/*"
 		exit
 	fi
 fi
