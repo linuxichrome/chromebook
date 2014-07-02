@@ -35,18 +35,8 @@ if [ $DEVICE = $EMMC ]; then
 	if [ -d "$INSTALLFILES" ]; then
 		pacman -U ~/installfiles/* --needed --noconfirm
 	else
-		pacman -Syyu devtools-alarm base-devel git libyaml parted dosfstools cgpt --ignore systemd --ignore systemd-sysvcompat --noconfirm --needed
+		printf "Directory /installfiles does not exist, exiting..."
 	fi    
-
-    wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz
-    tar xf package-query.tar.gz
-    cd package-query
-    makepkg -si --asroot --noconfirm
-    cd
-    pacman -Syy yaourt --noconfirm
-    yaourt -S vboot-utils --noconfirm
-    wget $repo/trousers-0.3.13-2-armv7h.pkg.tar.xz
-    pacman -U trousers-0.3.13-2-armv7h.pkg.tar.xz --noconfirm 
 fi
 
 log "Creating volumes on ${DEVICE}"
