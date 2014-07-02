@@ -118,9 +118,9 @@ fi
 if [ $DEVICE = $EMMC ]; then
 #Check if installpkg directory exists so we install packages to the new installation
 	if [ -d "$INSTALLPKG" ]; then	
-		sh /root/chroot.sh
+		sh /root/scripts/chroot.sh
 		cp -R /root/installpkg /mnt/arch/installpkg
-		cp /root/chroot-install.sh /mnt/arch
+		cp /root/scripts/chroot-install.sh /mnt/arch
 		chroot /mnt/arch /bin/bash -c "sh chroot-install.sh"
 		exit
 	fi
