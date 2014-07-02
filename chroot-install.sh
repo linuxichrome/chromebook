@@ -15,7 +15,7 @@ extra="wicd wicd-gtk chromium chromium-pepper-flash alsa-utils bash-completion s
  
 echo "Updating system."
 
-	pacman -Syyu --ignore systemd --ignore systemd-sysvcompat --noconfirm
+	pacman -Syy --ignore systemd --ignore systemd-sysvcompat --noconfirm
 
 echo "Installing additional software and configuration files."
 
