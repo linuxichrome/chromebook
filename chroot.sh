@@ -19,4 +19,4 @@
 
 #Enter chroot bash shell
 
-	chroot /mnt/arch /bin/bash
+#	chroot /mnt/arch /bin/bash
