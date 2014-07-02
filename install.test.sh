@@ -9,7 +9,7 @@ log() {
 EMMC="/dev/mmcblk0"
 DEFAULT_USB="/dev/sda"
 DEVICE=${1:-$DEFAULT_USB}
-PREINSTALL="~/preinstall"
+INSTALLFILES="~/installfiles"
 INSTALLPKG="~/installpkg"
 
 if [ "$DEVICE" = "$EMMC" ]; then
@@ -33,7 +33,7 @@ if [ $DEVICE = $EMMC ]; then
     # for eMMC we need to get some things before we can partition
     echo -e "\n[archlinuxfr]\nSigLevel = Never\nServer = http://repo.archlinux.fr/arm\n" >> /etc/pacman.conf
     
-	if [ -d "$DIRECTORY" ]; then
+	if [ -d "$INSTALLFILES" ]; then
 		pacman -U ~/preinstall/*
 	else
 		pacman -Syyu devtools-alarm base-devel git libyaml parted dosfstools cgpt --ignore systemd --ignore systemd-sysvcompat --noconfirm --needed
@@ -110,8 +110,6 @@ if [ $DEVICE = $EMMC ]; then
     --version 1
 
     dd if=arch-eMMC.kpart of=$P1
-
-    log "All done! Reboot and press ctrl + D to boot Arch"
 else
     if [ ! -f "${UBOOTFILE}" ]; then
         log "Downloading ${UBOOTFILE}"
@@ -121,8 +119,18 @@ else
     fi
     bunzip2 -f ${UBOOTFILE}
     dd if=nv_uboot-snow.kpart of=$P1
-
-    log "All done! Reboot and press ctrl + U to boot Arch from ${DEVICE}"
+    log "All done! Reboot and press ctrl + U to boot Arch"
 fi
+
+if [ $DEVICE = $EMMC ]; then
+#Check if installpkg directory exists so we install packages to the new installation
+	if [ -d "$INSTALLPKG" ]; then	
+		sh chroot.sh
+		cp ~/installpkg ~/mnt/arch/installpkg
+		chroot /mnt/arch /bin/bash
+		pacman -U ~/installpkg
+	fi
+fi
+	log "All done! Reboot and press ctrl + D to boot Arch"
 sync
 
