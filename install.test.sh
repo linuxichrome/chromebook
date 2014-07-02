@@ -127,7 +127,8 @@ if [ $DEVICE = $EMMC ]; then
 	if [ -d "$INSTALLPKG" ]; then	
 		sh /root/chroot.sh
 		cp -R /root/installpkg /mnt/arch/installpkg
-		chroot /mnt/arch /bin/bash -c "pacman -U /installpkg/*"
+		cp ./chroot-install.sh /mnt/arch
+		chroot /mnt/arch /bin/bash -c "sh chroot-install.sh"
 		exit
 	fi
 fi
