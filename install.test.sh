@@ -127,8 +127,8 @@ if [ $DEVICE = $EMMC ]; then
 	if [ -d "$INSTALLPKG" ]; then	
 		sh chroot.sh
 		cp -R /root/installpkg /mnt/arch/installpkg
-		chroot /mnt/arch /bin/bash
-		pacman -U /installpkg/*
+		chroot /mnt/arch /bin/bash pacman -U /installpkg/*
+		exit
 	fi
 fi
 	log "All done! Reboot and press ctrl + D to boot Arch"
