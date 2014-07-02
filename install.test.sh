@@ -24,9 +24,9 @@ else
     P12="${DEVICE}12"
 fi
 
-OSHOST="http://archlinuxarm.org/os/"
+OSHOST="/root/src/"
 OSFILE="ArchLinuxARM-chromebook-latest.tar.gz"
-UBOOTHOST="http://commondatastorage.googleapis.com/chromeos-localmirror/distfiles/"
+UBOOTHOST="/root/src/"
 UBOOTFILE="nv_uboot-snow.kpart.bz2"
 
 if [ $DEVICE = $EMMC ]; then
@@ -65,7 +65,7 @@ mkfs.ext2 -F $P2
 mkfs.ext4 -F $P3
 mkfs.vfat -F 16 $P12
 
-cd /tmp
+cd /src
 
 if [ ! -f "${OSFILE}" ]; then
     log "Downloading ${OSFILE}"
