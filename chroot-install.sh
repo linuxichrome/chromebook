@@ -15,7 +15,7 @@ extra="wicd wicd-gtk chromium chromium-pepper-flash alsa-utils bash-completion s
  
 echo "Installing packages and configution files."
 
-	pacman -U /installpkg/* --noconfirm
+	pacman -U /installpkg/* --noconfirm --needed
 	ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
 	wget -P /etc/X11/xorg.conf.d $repo/50-touchpad.conf
 	wget $repo/handler.sh -O /etc/acpi/handler.sh
