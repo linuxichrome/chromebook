@@ -35,6 +35,7 @@ if [ $DEVICE = $EMMC ]; then
 		pacman -U ~/installfiles/* --needed --noconfirm
 	else
 		printf "Mappen installfiles existerar inte, avslutar..."
+		exit 1
 	fi    
 fi
 
@@ -59,6 +60,7 @@ cd /tmp
 
 if [ ! -f "${OSFILE}" ]; then
     log "${OSFILE} existerar inte, avslutar..."
+    exit 1
 fi
 
 log "Installerar Arch på ${P3} (detta kommer ta en stund...)"
@@ -114,7 +116,8 @@ fi
 
 if [ $DEVICE = $EMMC ]; then
 #Check if installpkg directory exists so we can install packages to the new installation
-	if [ -d "$INSTALLPKG" ]; then	
+	if [ -d "$INSTALLPKG" ]; then
+		log "Kopierar filer... (detta kommer ta en stund)"	
 		sh /root/scripts/chroot.sh
 		cp -R $INSTALLPKG /mnt/arch/tmp/installpkg
 		cp -R /root/citrix /mnt/arch/tmp/citrix
