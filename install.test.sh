@@ -117,7 +117,7 @@ fi
 if [ $DEVICE = $EMMC ]; then
 #Check if installpkg directory exists so we can install packages to the new installation
 	if [ -d "$INSTALLPKG" ]; then
-		log "Kopierar filer... (detta kommer ta en stund)"	
+		log "Kopierar filer (detta kommer ta en stund...)"	
 		sh /root/scripts/chroot.sh
 		cp -R $INSTALLPKG /mnt/arch/tmp/installpkg
 		cp -R /root/citrix /mnt/arch/tmp/citrix
