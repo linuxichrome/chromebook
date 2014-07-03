@@ -40,7 +40,7 @@ log "Creating user account. Please enter password: "
 
 log "Installing Citrix Receiver."
 	 
-	tar xf /tmp/linuxarmhf-13.tar.gz -C /tmp/citrix
+	tar xf /tmp/citrix/linuxarmhf-13.tar.gz -C /tmp/citrix
 	/tmp/citrix/setupwfc
 	echo "application/x-ica=wfica.desktop" >> /usr/share/applications/mimeinfo.cache
 
