@@ -1,5 +1,4 @@
 #!/bin/bash
-repo="https://raw.githubusercontent.com/linuxichrome/chromebook/master"
 
 log() {
     printf "\n\033[32m$*\033[00m\n"
@@ -8,7 +7,7 @@ log() {
 EMMC="/dev/mmcblk0"
 DEFAULT_USB="/dev/sda"
 DEVICE=${1:-$DEFAULT_USB}
-INSTALLFILES="/root/installfiles"
+DEVTOOLS="/root/devtools"
 INSTALLPKG="/root/installpkg"
 
 if [ "$DEVICE" = "$EMMC" ]; then
@@ -29,13 +28,14 @@ UBOOTHOST="http://commondatastorage.googleapis.com/chromeos-localmirror/distfile
 UBOOTFILE="nv_uboot-snow.kpart.bz2"
 
 if [ $DEVICE = $EMMC ]; then
-    # for eMMC we need to get some things before we can partition
-    
-	if [ -d "$INSTALLFILES" ]; then
-		pacman -U ~/installfiles/* --needed --noconfirm
+    	if [ -d "$DEVTOOLS" ]; then
+		pacman -U $DEVTOOLS/* --needed --noconfirm
 	else
-		printf "Mappen installfiles existerar inte, avslutar..."
-		exit 1
+		log "$DEVTOOLS finns inte. Anslut till internet för att ladda ner filerna"
+		read -p "Tryck [enter] för att fortsätta" KEY
+		wifi-menu mlan0
+		pacman -Syyuw devtools-alarm base-devel git libyaml parted dosfstools cgpt --ignore systemd --ignore systemd-sysvcompat --noconfirm --cachedir $DEVTOOLS
+		pacman -U $DEVTOOLS/* --noconfirm
 	fi    
 fi
 
@@ -54,18 +54,20 @@ mkfs.ext2 -F $P2
 mkfs.ext4 -F $P3
 mkfs.vfat -F 16 $P12
 
-cp /root/src/* /tmp
+#Kopierar filer för installation
+
+if [ $DEVICE = $EMMC ]; then
+	cp /root/src/* /tmp
+fi
 
 cd /tmp
 
 if [ ! -f "${OSFILE}" ]; then
-    log "${OSFILE} existerar inte, avslutar..."
-    exit 1
+    log "Downloading ${OSFILE}"
+    wget ${OSHOST}${OSFILE}
 fi
 
 log "Installerar Arch på ${P3} (detta kommer ta en stund...)"
-
-cp /root/src/* /tmp
 
 mkdir -p root
 
@@ -115,7 +117,7 @@ else
 fi
 
 if [ $DEVICE = $EMMC ]; then
-#Check if installpkg directory exists so we can install packages to the new installation
+#Kopierar program till EMMC för installation
 	if [ -d "$INSTALLPKG" ]; then
 		log "Kopierar filer (detta kommer ta en stund...)"	
 		sh /root/scripts/chroot.sh
@@ -127,7 +129,7 @@ if [ $DEVICE = $EMMC ]; then
 	fi
 log "All done! Reboot and press ctrl + D to boot Arch"
 fi
-	printf "System will restart in 10 seconds."
-	sleep 10s; shutdown -r now
 sync
 
+printf "System will restart in 10 seconds."
+sleep 10s; shutdown -r now
