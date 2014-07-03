@@ -7,10 +7,9 @@ log() {
 #[Script configuration]
 
 #Sets the username for account creation
-username="studerande"
+USERNAME="studerande"
 
-#Sets the repository
-repo="https://raw.githubusercontent.com/linuxichrome/chromebook/master"
+CONFIG="/tmp/config"
 
 #[Packages]
 base="xorg-server xorg-xinit xorg-server-utils xf86-video-fbdev xf86-input-synaptics"
@@ -21,20 +20,19 @@ log "Installerar program och konfigurationsfiler."
 
 	pacman -U /tmp/installpkg/* --noconfirm --needed
 	ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
-	cp /tmp/config/50-touchpad.conf /etc/X11/xorg.conf.d
-	cp /tmp/config/handler.sh /etc/acpi/
+	cp $CONFIG/50-touchpad.conf /etc/X11/xorg.conf.d
+	cp $CONFIG/handler.sh /etc/acpi
+	cp $CONFIG/manager-settings.conf /etc/wicd
 	cat /tmp/config/usbconf >> /etc/fstab
 	mkdir /mnt/usbstick
 	systemctl enable kdm
 	systemctl enable wicd
 	systemctl enable acpid
 
-#Account creation
+log "Ange lösenord för $USERNAME:"
 
-log "Ange lösenord för kontot:"
-
-	useradd -m -g users -G wheel,storage,power -s /bin/bash $username
-	passwd $username
+	useradd -m -g users -G wheel,storage,power -s /bin/bash $USERNAME
+	passwd $USERNAME
 
 #Extrahera och installera citrix
 
