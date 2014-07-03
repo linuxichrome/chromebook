@@ -1,5 +1,9 @@
 #!/bin/bash
 
+log() {
+    printf "\n\033[32m$*\033[00m\n"
+}
+
 #[Script configuration]
 
 #Sets the username for account creation
@@ -13,14 +17,13 @@ base="xorg-server xorg-xinit xorg-server-utils xf86-video-fbdev xf86-input-synap
 desktop="kdebase xfce4 xfce4-goodies"
 extra="wicd wicd-gtk chromium chromium-pepper-flash alsa-utils bash-completion sudo libwebkit libpng12 acpid pm-utils libreoffice"
  
-echo "Installing packages and configution files."
+log "Installing packages and configution files."
 
 	pacman -U /installpkg/* --noconfirm --needed
 	ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
-	wget -P /etc/X11/xorg.conf.d $repo/50-touchpad.conf
-	wget $repo/handler.sh -O /etc/acpi/handler.sh
-	wget $repo/usbconf
-	cat usbconf >> /etc/fstab
+	cp /root/tmp/config/50-touchpad.conf /etc/X11/xorg.conf.d
+	cp /root/tmp/config/handler.sh /etc/acpi/
+	cat /tmp/config/usbconf >> /etc/fstab
 	mkdir /mnt/usbstick
 	systemctl enable kdm
 	systemctl enable wicd
@@ -28,21 +31,17 @@ echo "Installing packages and configution files."
 
 #Account creation
 
-echo "Creating user accounts."
+log "Creating user account. Please enter password: "
 
 	useradd -m -g users -G wheel,storage,power -s /bin/bash $username
 	passwd $username
 
 #Download and install Citrix Reciever
 
-echo "Installing Citrix Receiver."
-	
-	wget -P /tmp $repo/linuxarmhf-13.tar.gz 
-	mkdir /tmp/ctxinstall
-	tar -xzvf /tmp/linuxarmhf-13.tar.gz -C /tmp/ctxinstall 
-	/tmp/ctxinstall/setupwfc
-	rm -R /tmp/ctxinstall
-	rm /tmp/linuxarmhf-13.tar.gz
+log "Installing Citrix Receiver."
+	 
+	tar xf /tmp/linuxarmhf-13.tar.gz -C /tmp/citrix
+	/tmp/citrix/setupwfc
 	echo "application/x-ica=wfica.desktop" >> /usr/share/applications/mimeinfo.cache
 
 #Finished
