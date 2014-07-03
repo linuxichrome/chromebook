@@ -17,7 +17,7 @@ base="xorg-server xorg-xinit xorg-server-utils xf86-video-fbdev xf86-input-synap
 desktop="kdebase xfce4 xfce4-goodies"
 extra="wicd wicd-gtk chromium chromium-pepper-flash alsa-utils bash-completion sudo libwebkit libpng12 acpid pm-utils libreoffice"
  
-log "Installing packages and configution files."
+log "Installerar program och konfigurationsfiler."
 
 	pacman -U /tmp/installpkg/* --noconfirm --needed
 	ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
@@ -31,14 +31,14 @@ log "Installing packages and configution files."
 
 #Account creation
 
-log "Creating user account. Please enter password: "
+log "Ange lösenord för kontot:"
 
 	useradd -m -g users -G wheel,storage,power -s /bin/bash $username
 	passwd $username
 
-#Download and install Citrix Reciever
+#Extrahera och installera citrix
 
-log "Installing Citrix Receiver."
+log "Installerar Citrix."
 	 
 	tar xf /tmp/citrix/linuxarmhf-13.tar.gz -C /tmp/citrix
 	/tmp/citrix/setupwfc
