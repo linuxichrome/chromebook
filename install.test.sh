@@ -30,16 +30,15 @@ UBOOTFILE="nv_uboot-snow.kpart.bz2"
 
 if [ $DEVICE = $EMMC ]; then
     # for eMMC we need to get some things before we can partition
-    echo -e "\n[archlinuxfr]\nSigLevel = Never\nServer = http://repo.archlinux.fr/arm\n" >> /etc/pacman.conf
     
 	if [ -d "$INSTALLFILES" ]; then
 		pacman -U ~/installfiles/* --needed --noconfirm
 	else
-		printf "Directory /installfiles does not exist, exiting..."
+		printf "Mappen installfiles existerar inte, avslutar..."
 	fi    
 fi
 
-log "Creating volumes on ${DEVICE}"
+log "Skapar volymer på ${DEVICE}"
 umount ${DEVICE}*
 parted -s ${DEVICE} mklabel gpt
 cgpt create -z ${DEVICE}
@@ -59,12 +58,10 @@ cp /root/src/* /tmp
 cd /tmp
 
 if [ ! -f "${OSFILE}" ]; then
-    log "${OSFILE} does not exist, exiting..."
-else
-    log "Looks like you already have ${OSFILE}"
+    log "${OSFILE} existerar inte, avslutar..."
 fi
 
-log "Installing Arch to ${P3} (this will take a moment...)"
+log "Installerar Arch på ${P3} (detta kommer ta en stund...)"
 
 cp /root/src/* /tmp
 
@@ -119,12 +116,11 @@ if [ $DEVICE = $EMMC ]; then
 #Check if installpkg directory exists so we can install packages to the new installation
 	if [ -d "$INSTALLPKG" ]; then	
 		sh /root/scripts/chroot.sh
-		cp -R /root/installpkg /mnt/arch/tmp/installpkg
+		cp -R $INSTALLPKG /mnt/arch/tmp/installpkg
 		cp -R /root/citrix /mnt/arch/tmp/citrix
 		cp -R /root/config /mnt/arch/tmp/config
 		cp /root/scripts/chroot-install.sh /mnt/arch/tmp
 		chroot /mnt/arch /bin/bash -c "sh /tmp/chroot-install.sh"
-		exit
 	fi
 log "All done! Reboot and press ctrl + D to boot Arch"
 fi
