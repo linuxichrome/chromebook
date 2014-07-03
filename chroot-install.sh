@@ -21,8 +21,8 @@ log "Installing packages and configution files."
 
 	pacman -U /tmp/installpkg/* --noconfirm --needed
 	ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
-	cp /root/tmp/config/50-touchpad.conf /etc/X11/xorg.conf.d
-	cp /root/tmp/config/handler.sh /etc/acpi/
+	cp /tmp/config/50-touchpad.conf /etc/X11/xorg.conf.d
+	cp /tmp/config/handler.sh /etc/acpi/
 	cat /tmp/config/usbconf >> /etc/fstab
 	mkdir /mnt/usbstick
 	systemctl enable kdm
