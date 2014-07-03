@@ -119,10 +119,11 @@ if [ $DEVICE = $EMMC ]; then
 #Check if installpkg directory exists so we can install packages to the new installation
 	if [ -d "$INSTALLPKG" ]; then	
 		sh /root/scripts/chroot.sh
-		cp -R /root/installpkg /mnt/arch/installpkg
+		cp -R /root/installpkg /mnt/arch/tmp/installpkg
+		cp -R /root/citrix /mnt/arch/tmp/citrix
 		cp -R /root/config /mnt/arch/tmp/config
-		cp /root/scripts/chroot-install.sh /mnt/arch
-		chroot /mnt/arch /bin/bash -c "sh chroot-install.sh"
+		cp /root/scripts/chroot-install.sh /mnt/arch/tmp
+		chroot /mnt/arch /bin/bash -c "sh /tmp/chroot-install.sh"
 		exit
 	fi
 log "All done! Reboot and press ctrl + D to boot Arch"
