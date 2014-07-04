@@ -22,17 +22,19 @@ Steg 1 ”Förberedelse”
 7.	Skriv sudo su, och sedan enter för att bli administratör.
 
 
-8.	Skrev sedan crossystem dev_boot_usb=1 dev_boot_signed_only=0 och sedan enter för att tillåta datorn att boota 
-
-           från USB.
+8.	Skrev sedan crossystem dev_boot_usb=1 dev_boot_signed_only=0 och sedan enter för att tillåta datorn att boota från USB.
 
 
 OBS! All fet text är kommandon som måste avslutas med ENTER-knappen
            Alla kommandon måste skrivas exakt som de står. 
 
 Steg 2 "Installera linux" 
-1.	Sätt in USB-minnet(Inte i den blåa porten).
-2.	Starta om datorn och tryck CTRL-U för att boota USB-minnet.
-3.	Ange root som användarnamn och tryck enter
-4.	Skriv sh setup och tryck enter.
+1.	Sätt in USB-minnet(Inte i den blåa porten).  
+
+2.	Starta om datorn och tryck CTRL-U för att boota USB-minnet.  
+
+3.	Ange root som användarnamn och tryck enter  
+
+4.	Skriv sh setup och tryck enter.  
+
 5.	Under installationens gång kommer den be dig att ange ett lösenord för kontot ”studerande”. 
