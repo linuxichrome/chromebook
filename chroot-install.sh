@@ -21,6 +21,7 @@ log "Installerar program och konfigurationsfiler (Ta en kaffe under tiden...)"
 	pacman -U /tmp/installpkg/* --noconfirm --needed
 	ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
 	cp $CONFIG/50-touchpad.conf /etc/X11/xorg.conf.d
+	cp $CONFIG/00-keyboard.conf /etc/X11/xorg.conf.d
 	cp $CONFIG/handler.sh /etc/acpi
 	#Wifi settings
 	cp $CONFIG/manager-settings.conf /etc/wicd
