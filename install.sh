@@ -27,6 +27,7 @@ OSFILE="ArchLinuxARM-chromebook-latest.tar.gz"
 UBOOTHOST="http://commondatastorage.googleapis.com/chromeos-localmirror/distfiles/"
 UBOOTFILE="nv_uboot-snow.kpart.bz2"
 
+#Installera paket om $DEVTOOLS finns, ladda annars ner paket och och installera.
 if [ $DEVICE = $EMMC ]; then
     	if [ -d "$DEVTOOLS" ]; then
 		pacman -U $DEVTOOLS/* --needed --noconfirm
