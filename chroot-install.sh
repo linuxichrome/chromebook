@@ -16,7 +16,7 @@ CONFIG="/tmp/config"
 #desktop="kdebase xfce4 xfce4-goodies"
 #extra="wicd wicd-gtk chromium chromium-pepper-flash alsa-utils bash-completion sudo libwebkit libpng12 acpid pm-utils libreoffice"
  
-log "Installerar program och konfigurationsfiler."
+log "Installerar program och konfigurationsfiler (Ta en kaffe under tiden...)"
 
 	pacman -U /tmp/installpkg/* --noconfirm --needed
 	ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
