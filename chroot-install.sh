@@ -12,9 +12,9 @@ USERNAME="studerande"
 CONFIG="/tmp/config"
 
 #[Packages]
-base="xorg-server xorg-xinit xorg-server-utils xf86-video-fbdev xf86-input-synaptics"
-desktop="kdebase xfce4 xfce4-goodies"
-extra="wicd wicd-gtk chromium chromium-pepper-flash alsa-utils bash-completion sudo libwebkit libpng12 acpid pm-utils libreoffice"
+#base="xorg-server xorg-xinit xorg-server-utils xf86-video-fbdev xf86-input-synaptics"
+#desktop="kdebase xfce4 xfce4-goodies"
+#extra="wicd wicd-gtk chromium chromium-pepper-flash alsa-utils bash-completion sudo libwebkit libpng12 acpid pm-utils libreoffice"
  
 log "Installerar program och konfigurationsfiler."
 
@@ -23,7 +23,7 @@ log "Installerar program och konfigurationsfiler."
 	cp $CONFIG/50-touchpad.conf /etc/X11/xorg.conf.d
 	cp $CONFIG/handler.sh /etc/acpi
 	cp $CONFIG/manager-settings.conf /etc/wicd
-	cat /tmp/config/usbconf >> /etc/fstab
+	cat $CONFIG/usbconf >> /etc/fstab
 	mkdir /mnt/usbstick
 	systemctl enable kdm
 	systemctl enable wicd
