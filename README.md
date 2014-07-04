@@ -4,18 +4,13 @@ Samsung Chromebook XE303C12 with Arch Linux
 Steg 1 ”Förberedelse”
 
 
-1.	Stäng av datorn
+1.	Stäng av datorn  
 
+2.	Håll inne ESC och REFRESH(3 steg från ESC) och tryck på power-knappen.  
 
-2.	Håll inne ESC och REFRESH(3 steg från ESC) och tryck på power-knappen.
+3.	När  du ser en vit skärm med ett stort utropstecken, tryck CTRL-D.  
 
-
-3.	När  du ser en vit skärm med ett stort utropstecken, tryck CTRL-D.
-
-
-4.	Tryck på Enter för att bekräfta att du vill stänga av ”OS verification”. Datorn kommer starta om och påbörja     
-	
-           återställning av systemet. Detta tar ungefär 10-15 minuter.
+4.	Tryck på Enter för att bekräfta att du vill stänga av ”OS verification”. Datorn kommer starta om och påbörja återställning av systemet. Detta tar ungefär 10-15 minuter.  
 
 
 5.	När du är inloggad på datorn, tryck CTRL+ALT+T för att komma åt terminalen.
