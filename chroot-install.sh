@@ -44,7 +44,7 @@ log "Ange lösenord för $USERNAME:"
 
 	useradd -m -g users -G wheel,storage,power -s /bin/bash $USERNAME
 	passwd $USERNAME
-	echo '$USERNAME ALL=(ALL:ALL) ALL' >> /etc/sudoers
+	echo "$USERNAME ALL=(ALL:ALL) ALL" >> /etc/sudoers
 #Extrahera och installera citrix
 
 log "Installerar Citrix."
