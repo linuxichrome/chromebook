@@ -22,7 +22,10 @@ log "Installerar program och konfigurationsfiler (Ta en kaffe under tiden...)"
 	ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
 	cp $CONFIG/50-touchpad.conf /etc/X11/xorg.conf.d
 	cp $CONFIG/handler.sh /etc/acpi
+	#Wifi settings
 	cp $CONFIG/manager-settings.conf /etc/wicd
+	cp $CONFIG/wireless-settings.conf /etc/wicd
+
 	cat $CONFIG/usbconf >> /etc/fstab
 	mkdir /mnt/usbstick
 	systemctl enable kdm
