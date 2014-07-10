@@ -41,4 +41,4 @@ Steg 2 "Installera linux"
 
 6.	Tryk på enter för 1 fråga , sedan Y på resten av frågor (citrix installation).
 
-7.         Skrivbord: xfce4.
+7.	Skrivbord: xfce4.
