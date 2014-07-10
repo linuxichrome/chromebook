@@ -29,6 +29,7 @@ OBS! All fet text är kommandon som måste avslutas med ENTER-knappen
            Alla kommandon måste skrivas exakt som de står. 
 
 Steg 2 "Installera linux" 
+
 1.	Sätt in USB-minnet(Inte i den blåa porten).  
 
 2.	Starta om datorn och tryck CTRL-U för att boota USB-minnet.  
