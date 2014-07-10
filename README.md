@@ -39,6 +39,6 @@ Steg 2 "Installera linux"
 
 5.	Under installationens gång kommer den be dig att ange ett lösenord för kontot ”studerande”. 
 
-6.         Tryk på enter för 1 fråga , sedan Y på resten av frågor  (citrix installation).
+6.	Tryk på enter för 1 fråga , sedan Y på resten av frågor (citrix installation).
 
 7.         Skrivbord: xfce4.
